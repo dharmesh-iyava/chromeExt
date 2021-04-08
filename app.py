@@ -26,7 +26,7 @@ def info(mname,mphone,memail,mrevenue,name_1,position_1,email_1,phone_1,name_2,p
 
         currTime = "T2B Info"
 
-        mainPath = "D:/"
+        mainPath = "D:/Dharmesh"
 
         # everyday create a new path with latest date
         createFolder(mainPath, currTime)
