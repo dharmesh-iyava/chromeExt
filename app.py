@@ -4,6 +4,7 @@ from os import path
 import csv
 import psycopg2
 import datetime as dt
+
 app = Flask(__name__)
 
 conn = psycopg2.connect(
@@ -29,52 +30,7 @@ def home():
 
 def sqldata(mname,mphone,memail,mrevenue,name_1,position_1,email_1,phone_1,name_2,position_2,email_2,phone_2,name_3,position_3,email_3,phone_3):
     if request.method == 'GET': 
-        cdate = dt.datetime.now().strftime('%d-%m-%Y %H:%M')
-        cursor.execute('INSERT INTO info(cname, cemail, date) VALUES (%s, %s, %s)', (mname, memail, cdate))
+        cdate = dt.datetime.now().strftime('%Y-%m-%d %H:%M')
+        cursor.execute('INSERT INTO t2binfo(company_name, company_email, company_phone, company_revenue, te1_name, te1_position, te1_email, te1_phone, te2_name, te2_position, te2_email, te2_phone, te3_name, te3_position, te3_email, te3_phone, created_date) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)', (mname, memail, mphone, mrevenue, name_1, position_1, email_1, phone_1, name_2, position_2, email_2, phone_2, name_3, position_3, email_3, phone_3, cdate))
         conn.commit()
-        print("add1")
-    return 'hii'
-
-def info(mname,mphone,memail,mrevenue,name_1,position_1,email_1,phone_1,name_2,position_2,email_2,phone_2,name_3,position_3,email_3,phone_3):
-
-    if mname != "":
-
-        currTime = "T2B Info"
-
-        mainPath = "/home/dharmesh/Desktop/dharmesh/T2B"
-
-        # everyday create a new path with latest date
-        createFolder(mainPath, currTime)
-        mainPath = mainPath + "/" + currTime
-
-        if not path.exists(mainPath + "/T2binfo.csv"):
-            with open(mainPath + "/T2binfo.csv", 'a', newline='', encoding='utf-8') as csvfile:
-                fieldnames = ['c_name','c_email','c_phone','c_revenue','top_executive_name_1','top_executive_position_1','top_executive_email_1','top_executive_phone_1','top_executive_name_2','top_executive_position_2','top_executive_email_2','top_executive_phone_2','top_executive_name_3','top_executive_position_3','top_executive_email_3','top_executive_phone_3']
-
-                writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-
-                writer.writerow({'c_name':'c_name','c_email':'c_email','c_phone':'c_phone','c_revenue':'c_revenue',
-                                'top_executive_name_1':'top_executive_name_1','top_executive_position_1':'top_executive_position_1','top_executive_email_1':'top_executive_email_1','top_executive_phone_1':'top_executive_phone_1',
-                                'top_executive_name_2':'top_executive_name_2','top_executive_position_2':'top_executive_position_2','top_executive_email_2':'top_executive_email_2','top_executive_phone_2':'top_executive_phone_2',
-                                'top_executive_name_3':'top_executive_name_3','top_executive_position_3':'top_executive_position_3','top_executive_email_3':'top_executive_email_3','top_executive_phone_3':'top_executive_phone_3'})
-
-        # write csv
-        with open(mainPath + "/T2binfo.csv", 'a', newline='', encoding='utf-8') as csvfile:
-            fieldnames = ['c_name','c_email','c_phone','c_revenue','top_executive_name_1','top_executive_position_1','top_executive_email_1','top_executive_phone_1','top_executive_name_2','top_executive_position_2','top_executive_email_2','top_executive_phone_2','top_executive_name_3','top_executive_position_3','top_executive_email_3','top_executive_phone_3']
-
-            writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-
-            writer.writerow({'c_name': mname ,'c_email': memail ,'c_phone': mphone ,'c_revenue': mrevenue,
-                            'top_executive_name_1': name_1 ,'top_executive_position_1': position_1 ,'top_executive_email_1': email_1 ,'top_executive_phone_1': phone_1,
-                            'top_executive_name_2': name_2 ,'top_executive_position_2': position_2 ,'top_executive_email_2': email_2 ,'top_executive_phone_2': phone_2,
-                            'top_executive_name_3': name_3 ,'top_executive_position_3': position_3 ,'top_executive_email_3': email_3 ,'top_executive_phone_3': phone_3})
-
-        return 'Data Transfered Successfully', 200
-
-    # GET request
-    else:
-        message = {'greeting':'Hello from Flask!'}
-        return jsonify(message)  # serialize and use JSON headers
-    
-if __name__ == "__main__":
-        app.run(debug=True)
+    return 'Data Transfered Successfully', 200
