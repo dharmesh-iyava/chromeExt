@@ -8,7 +8,7 @@ import datetime as dt
 app = Flask(__name__)
 
 conn = psycopg2.connect(
-   database="feedbackData", user='postgres', password='postgres', host='localhost', port= '5432'
+   database="tendermanagement", user='tendermanagement', password='tendermanagement123', host='3.19.40.8', port= '5435'
 )
 conn.autocommit = True
 cursor = conn.cursor()
