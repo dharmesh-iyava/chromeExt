@@ -32,7 +32,7 @@ def home():
 def sqldata(mname,mphone,memail,mrevenue,name_1,position_1,email_1,phone_1,name_2,position_2,email_2,phone_2,name_3,position_3,email_3,phone_3,emp_name,maddress):
     if request.method == 'GET': 
         s1 = re.split(',', maddress)
-        maddress = s1[-1]
+        maddress = s1[-1].strip()
         cdate = dt.datetime.now().strftime('%Y-%m-%d %H:%M')
         cursor.execute('INSERT INTO t2binfo(company_name, company_email, company_phone, company_revenue, te1_name, te1_position, te1_email, te1_phone, te2_name, te2_position, te2_email, te2_phone, te3_name, te3_position, te3_email, te3_phone, created_date, modified_by, country) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)', (mname, memail, mphone, mrevenue, name_1, position_1, email_1, phone_1, name_2, position_2, email_2, phone_2, name_3, position_3, email_3, phone_3, cdate, emp_name, maddress))
         conn.commit()
