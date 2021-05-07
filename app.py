@@ -33,7 +33,7 @@ def sqldata(mname,mphone,memail,mrevenue,name_1,position_1,email_1,phone_1,name_
     if request.method == 'GET': 
         s1 = re.split(',', maddress)
         maddress = s1[-1]
-        print(mname, memail, mphone, mrevenue, name_1, position_1, email_1, phone_1, name_2, position_2, email_2, phone_2, name_3, position_3, email_3, phone_3)
+        #print(mname, memail, mphone, mrevenue, name_1, position_1, email_1, phone_1, name_2, position_2, email_2, phone_2, name_3, position_3, email_3, phone_3)
         femail, fphone, ffname, flname , fposition = '', '', '', '', ''
         try:
             if email_1 == ' ' or email_2 == ' ' or email_3 == ' ':
@@ -141,6 +141,7 @@ def sqldata(mname,mphone,memail,mrevenue,name_1,position_1,email_1,phone_1,name_
                         <th>Top Executive Position</th>
                         <th>Top Executive Email</th>
                         <th>Top Executive Phone</th>
+                        <th>Country</th>
                     </tr>
                     <tr>"""f"""
                         <td>{mname}</td>
@@ -152,6 +153,7 @@ def sqldata(mname,mphone,memail,mrevenue,name_1,position_1,email_1,phone_1,name_
                         <td>{fposition}</td>
                         <td>{femail}</td>
                         <td>{fphone}</td>
+                        <td>{maddress}</td>
                     </tr>
                     </table>
 
