@@ -67,7 +67,7 @@ def sqldata(mname,mphone,memail,mrevenue,name_1,position_1,email_1,phone_1,name_
             pass
 
         try:
-            if phone_1 == 'B' or phone_2 == 'B' or phone_3 == 'B':
+            if phone_1 == 'B' or phone_2 == 'B' or phone_3 == 'B' or phone_1 == 'NA' or phone_2 == 'NA' or phone_3 == 'NA':
                 phone_1 = phone_1.replace('B', '')
                 phone_2 = phone_2.replace('B', '')
                 phone_3 = phone_3.replace('B', '')
