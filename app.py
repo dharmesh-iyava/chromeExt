@@ -27,7 +27,7 @@ def createFolder(sourceFolder, folderName):
 def home():
     return '<h1 style="color:#007780;display: flex;justify-content: center;margin-top:250px;font-size:4rem;text-decoration:underline;">Welcome to Tenders2bidInfo</h1>'
 
-@app.route('/data/<string:mname>/<string:mphone>/<string:memail>/<string:mrevenue>/<string:name_1>/<string:position_1>/<string:email_1>/<string:phone_1>/<string:name_2>/<string:position_2>/<string:email_2>/<string:phone_2>/<string:name_3>/<string:position_3>/<string:email_3>/<string:phone_3>/<string:emp_name>/<string:maddress>')
+@app.route('/data/<string:mname>/<string:mphone>/<string:memail>/<string:mrevenue>/<string:name_1>/<string:position_1>/<string:email_1>/<string:phone_1>/<string:emp_name>/<string:maddress>')
 
 def sqldata(mname,mphone,memail,mrevenue,name_1,position_1,email_1,phone_1,emp_name,maddress):
     if request.method == 'GET': 
