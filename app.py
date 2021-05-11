@@ -36,7 +36,7 @@ def sqldata(mname,mphone,memail,mrevenue,name_1,position_1,email_1,phone_1,name_
         #print(mname, memail, mphone, mrevenue, name_1, position_1, email_1, phone_1, name_2, position_2, email_2, phone_2, name_3, position_3, email_3, phone_3)
         femail, fphone, ffname, flname , fposition = '', '', '', '', ''
         try:
-            if email_1 == ' ' or email_2 == ' ' or email_3 == ' ':
+            if email_1 == ' ' or email_2 == ' ' or email_3 == ' ' or email_1 == 'NA' or email_2 == 'NA' or email_3 == 'NA':
                 email_1 = email_1.replace(' ', '')
                 email_2 = email_2.replace(' ', '')
                 email_3 = email_3.replace(' ', '')
