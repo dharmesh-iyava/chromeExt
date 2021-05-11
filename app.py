@@ -29,71 +29,21 @@ def home():
 
 @app.route('/data/<string:mname>/<string:mphone>/<string:memail>/<string:mrevenue>/<string:name_1>/<string:position_1>/<string:email_1>/<string:phone_1>/<string:name_2>/<string:position_2>/<string:email_2>/<string:phone_2>/<string:name_3>/<string:position_3>/<string:email_3>/<string:phone_3>/<string:emp_name>/<string:maddress>')
 
-def sqldata(mname,mphone,memail,mrevenue,name_1,position_1,email_1,phone_1,name_2,position_2,email_2,phone_2,name_3,position_3,email_3,phone_3,emp_name,maddress):
+def sqldata(mname,mphone,memail,mrevenue,name_1,position_1,email_1,phone_1,emp_name,maddress):
     if request.method == 'GET': 
         s1 = re.split(',', maddress)
         maddress = s1[-1]
-        #print(mname, memail, mphone, mrevenue, name_1, position_1, email_1, phone_1, name_2, position_2, email_2, phone_2, name_3, position_3, email_3, phone_3)
-        femail, fphone, ffname, flname , fposition = '', '', '', '', ''
-        try:
-            if email_1 == ' ' or email_2 == ' ' or email_3 == ' ' or email_1 == 'NA' or email_2 == 'NA' or email_3 == 'NA':
-                email_1 = email_1.replace(' ', '')
-                email_2 = email_2.replace(' ', '')
-                email_3 = email_3.replace(' ', '')
-                email_1 = email_1.replace('NA', '')
-                email_2 = email_2.replace('NA', '')
-                email_3 = email_3.replace('NA', '')
-            if email_1 == '' and email_2 == '':
-                femail = email_3
-                fposition = position_3
-                s1 = re.split(' ', name_3)
-                ffname = s1[0]
-                flname = s1[1]
-            elif email_3 == '' and email_2 == '':
-                femail = email_1
-                fposition = position_1
-                s1 = re.split(' ', name_1)
-                ffname = s1[0]
-                flname = s1[1]
-            elif email_1 == '' and email_3 == '':
-                femail = email_2
-                fposition = position_2
-                s1 = re.split(' ', name_2)
-                ffname = s1[0]
-                flname = s1[1]
-            elif email_1 == '' and email_2 == '' and email_3 == '':
-                return 'You have not clicked any top executive'
-        except:
-            pass
-
-        try:
-            if phone_1 == 'B' or phone_2 == 'B' or phone_3 == 'B' or phone_1 == 'NA' or phone_2 == 'NA' or phone_3 == 'NA':
-                phone_1 = phone_1.replace('B', '')
-                phone_2 = phone_2.replace('B', '')
-                phone_3 = phone_3.replace('B', '')
-                phone_1 = phone_1.replace('NA', '')
-                phone_2 = phone_2.replace('NA', '')
-                phone_3 = phone_3.replace('NA', '')
-            if phone_1 == '' and phone_2 == '':
-                fphone = phone_3
-            elif phone_3 == '' and phone_2 == '':
-                fphone = phone_1
-            elif phone_1 == '' and phone_3 == '':
-                fphone = phone_2
-        except:
-            pass
-        #print(ffname, flname, fposition, femail, fphone)
-
-        femail = femail.replace('(Business)', '').replace('(Supplemental)', '').replace('(HQ)', '').replace('(Mobile)', '').replace('(Direct)', '')
-        fphone = fphone.replace('(Business)', '').replace('(Supplemental)', '').replace('(HQ)', '').replace('(Mobile)', '').replace('(Direct)', '')
-        if '(' in femail:
-            fphone = femail
-            femail = 'NA'
+        #print(phone_1)
+        s2 = re.split(' ', name_1)
+        ffname = s2[0].strip()
+        flname = s2[1].strip()
+        email_1 = email_1.replace('(Business)', '').replace('(Supplemental)', '').replace('(HQ)', '').replace('(Mobile)', '').replace('(Direct)', '')
+        phone_1 = phone_1.replace('(Business)', '').replace('(Supplemental)', '').replace('(HQ)', '').replace('(Mobile)', '').replace('(Direct)', '')
         cdate = dt.datetime.now().strftime('%Y-%m-%d %H:%M')
-        if femail == '' or femail == ' ':
+        if email_1 == '' or phone_1 == ' ':
             return '<h2 style="font-weight:bold;background-color:red;color:white;text-align:center;padding:10px;">You Have not Clicked Any Top Executive</h2>'
         else:
-            cursor.execute('INSERT INTO t2bzoominfo(company_name, company_email, company_phone, company_revenue, te_fname, te_lname, te_position, te_email, te_phone, created_date, modified_by, country) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)', (mname, memail, mphone, mrevenue, ffname, flname, fposition, femail, fphone, cdate, emp_name, maddress))
+            cursor.execute('INSERT INTO t2bzoominfo(company_name, company_email, company_phone, company_revenue, te_fname, te_lname, te_position, te_email, te_phone, created_date, modified_by, country) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)', (mname, memail, mphone, mrevenue, ffname, flname, position_1, email_1, phone_1, cdate, emp_name, maddress))
             conn.commit()
         # return '<h2 style="font-weight:bold;background-color:green;color:white;text-align:center;padding:10px;">Data Transfered Successfully</h2>', 200
         return r"""
@@ -150,9 +100,9 @@ def sqldata(mname,mphone,memail,mrevenue,name_1,position_1,email_1,phone_1,name_
                         <td>{mrevenue}</td>
                         <td>{ffname}</td>
                         <td>{flname}</td>
-                        <td>{fposition}</td>
-                        <td>{femail}</td>
-                        <td>{fphone}</td>
+                        <td>{position_1}</td>
+                        <td>{email_1}</td>
+                        <td>{phone_1}</td>
                         <td>{maddress}</td>
                     </tr>
                     </table>
