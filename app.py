@@ -37,8 +37,13 @@ def sqldata(mname,mphone,memail,mrevenue,name_1,position_1,email_1,phone_1,emp_n
         s2 = re.split(' ', name_1)
         ffname = s2[0].strip()
         flname = s2[1].strip()
-        email_1 = email_1.replace('(Business)', '').replace('(Supplemental)', '').replace('(HQ)', '').replace('(Mobile)', '').replace('(Direct)', '')
-        phone_1 = phone_1.replace('(Business)', '').replace('(Supplemental)', '').replace('(HQ)', '').replace('(Mobile)', '').replace('(Direct)', '')
+        #email_1 = email_1.replace('(Business)', '').replace('(Supplemental)', '').replace('(HQ)', '').replace('(Mobile)', '').replace('(Direct)', '')
+        #phone_1 = phone_1.replace('(Business)', '').replace('(Supplemental)', '').replace('(HQ)', '').replace('(Mobile)', '').replace('(Direct)', '')
+        email_1 = email_1.replace('__', ',')
+        if ',' in email_1:
+            s1 = re.split(',', email_1)
+            email_1 = email_1.replace(s1[0]+',', '')
+        phone_1 = phone_1.replace('__', ',').replace(', ,', ',')
         cdate = dt.datetime.now().strftime('%Y-%m-%d %H:%M')
         if email_1 == '' or phone_1 == ' ':
             return '<h2 style="font-weight:bold;background-color:red;color:white;text-align:center;padding:10px;">You Have not Clicked Any Top Executive</h2>'
