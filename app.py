@@ -34,6 +34,7 @@ def sqldata(mname,mphone,memail,mrevenue,name_1,position_1,email_1,phone_1,emp_n
         s1 = re.split(',', maddress)
         maddress = s1[-1]
         #print(phone_1)
+        name_1 = name_1.replace('\. ', '')
         s2 = re.split(' ', name_1)
         ffname = s2[0].strip()
         flname = s2[1].strip()
