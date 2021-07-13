@@ -45,6 +45,7 @@ def sqldata(mname,mphone,memail,mrevenue,name_1,position_1,email_1,phone_1,emp_n
             s1 = re.split(',', email_1)
             email_1 = email_1.replace(s1[0]+',', '')
         phone_1 = phone_1.replace('__', ',').replace(', ,', ',')
+        email_1 = email_1.replace('(Business)', '').replace('(Supplemental)', '').replace('(HQ)', '').replace('(Mobile)', '').replace('(Direct)', '')
         cdate = dt.datetime.now().strftime('%Y-%m-%d %H:%M')
         if email_1 == '' or phone_1 == ' ':
             return '<h2 style="font-weight:bold;background-color:red;color:white;text-align:center;padding:10px;">You Have not Clicked Any Top Executive</h2>'
